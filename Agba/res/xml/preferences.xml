@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mliquid="http://aotasoft.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/audio_settings" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="soundEnabled"
+            android:title="@string/enable_sound" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/video_settings" >
+        <ListPreference
+            android:defaultValue="stretch"
+            android:entries="@array/scaling_mode_entries"
+            android:entryValues="@array/scaling_mode_entryvalues"
+            android:key="scalingMode"
+            android:title="@string/scaling_mode" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="autoFrameSkip"
+            android:title="@string/auto_frame_skip" />
+
+        <com.moba.gba.SeekBarPreference
+            android:defaultValue="2"
+            android:key="maxFrameSkips"
+            android:summary="@string/max_frame_skips_summary"
+            android:title="@string/max_frame_skips"
+            mliquid:maxValue="10" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/input_settings" >
+        <PreferenceScreen
+            android:key="keySettings"
+            android:summary="@string/key_settings_summary"
+            android:title="@string/key_settings" >
+            <PreferenceCategory
+                android:key="gameKeyBindings"
+                android:title="@string/game_key_bindings" />
+            <PreferenceCategory android:title="@string/shortcut_keys" >
+                <com.moba.gba.GameKeyPreference
+                    android:defaultValue="0"
+                    android:key="quickLoad"
+                    android:title="@string/quick_load" />
+                <com.moba.gba.GameKeyPreference
+                    android:defaultValue="0"
+                    android:key="quickSave"
+                    android:title="@string/quick_save" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="enableVirtualKeypad"
+            android:summary="@string/enable_virtual_keypad_summary"
+            android:title="@string/enable_virtual_keypad" />
+        <CheckBoxPreference
+            android:key="enableTrackball"
+            android:summary="@string/enable_trackball_summary"
+            android:title="@string/enable_trackball" />
+
+        <PreferenceScreen
+            android:dependency="enableVirtualKeypad"
+            android:summary="@string/vkeypad_settings_summary"
+            android:title="@string/vkeypad_settings" >
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="enableVibrator"
+                android:title="@string/enable_vibrator" />
+            <CheckBoxPreference
+                android:key="dpad4Way"
+                android:title="@string/dpad_4way" />
+
+            <com.moba.gba.SeekBarPreference
+                android:defaultValue="2"
+                android:key="dpadDeadZone"
+                android:title="@string/dpad_deadzone"
+                mliquid:maxValue="4" />
+
+            <PreferenceCategory android:title="@string/two_buttons_press" >
+                <CheckBoxPreference
+                    android:key="inBetweenPress"
+                    android:summary="@string/in_between_press_summary"
+                    android:title="@string/in_between_press" />
+                <CheckBoxPreference
+                    android:key="pointSizePress"
+                    android:summary="@string/point_size_press_summary"
+                    android:title="@string/point_size_press" />
+
+                <com.moba.gba.SeekBarPreference
+                    android:defaultValue="7"
+                    android:dependency="pointSizePress"
+                    android:key="pointSizePressThreshold"
+                    android:title="@string/point_size_press_threshold"
+                    mliquid:maxValue="10" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/appearance" >
+                <ListPreference
+                    android:defaultValue="medium"
+                    android:entries="@array/vkeypad_size_entries"
+                    android:entryValues="@array/vkeypad_size_entryvalues"
+                    android:key="vkeypadSize"
+                    android:title="@string/vkeypad_size" />
+
+                <com.moba.gba.SeekBarPreference
+                    android:defaultValue="50"
+                    android:key="vkeypadTransparency"
+                    android:title="@string/vkeypad_transparency" />
+
+                <PreferenceScreen
+                    android:key="hideControls"
+                    android:title="@string/hide_controls" >
+                    <CheckBoxPreference
+                        android:key="hideDpad"
+                        android:title="@string/hide_dpad" />
+                    <CheckBoxPreference
+                        android:key="hideButtons"
+                        android:title="@string/hide_buttons" />
+                    <CheckBoxPreference
+                        android:key="hideSelectStart"
+                        android:title="@string/hide_select_start" />
+                    <CheckBoxPreference
+                        android:key="hideShoulders"
+                        android:title="@string/hide_shoulders" />
+                </PreferenceScreen>
+            </PreferenceCategory>
+
+            <ListPreference
+                android:defaultValue="bottom_bottom"
+                android:entries="@array/vkeypad_layout_entries"
+                android:entryValues="@array/vkeypad_layout_entryvalues"
+                android:key="vkeypadLayout"
+                android:title="@string/vkeypad_layout" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Roms" >
+        <Preference
+            android:key="topRoms"
+            android:title="@string/top_roms" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://game-emus.blogspot.com/2014/04/gba-roms.html" />
+        </Preference>
+        <Preference
+            android:key="searchRoms"
+            android:title="@string/search_roms" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://www.google.com.vn/search?q=gba+roms+android" />
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/about" >
+        <Preference
+            android:summary="View on Play Store for source link."
+            android:title="License: GPLv3+" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="market://details?id=com.gemuvn.gba" />
+        </Preference>
+        <Preference
+            android:key="appIssues"
+            android:title="@string/app_issues" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="mailto:bbs.angus710610@gmail.com" >
+                <extra android:name="android.intent.extra.SUBJECT" android:value="@string/email_subject" />
+                <extra android:name="android.intent.extra.TEXT" android:value="@string/email_body" />
+            </intent>
+        </Preference>
+        <Preference
+            android:key="moreApp"
+            android:title="@string/app_more_apps" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://play.google.com/store/apps/developer?id=Amy%20Janicke" />
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
