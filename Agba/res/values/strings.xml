@@ -17,6 +17,9 @@
 
 	<string name="no_rom">No ROM loaded.\nPress <b>Menu</b> for more options.</string>
 	<string name="upgrade">Upgrade to premium</string>
+	<string name="purchase_title">Agba</string>
+	<string name="purchase_message">Loading rom is only available in the Premium version. Do you want to upgrade?</string>
+	<string name="ok_button">Ok</string>
 	<string name="load_rom_failed">Load ROM failed. Please try another file.</string>
 	<string name="quit_game_title">Quit Options</string>
 	<string name="load_state_title">Load State</string>

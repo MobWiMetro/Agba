@@ -63,6 +63,7 @@ public class Agba extends Activity implements GameKeyListener,
 	private static final int DIALOG_QUIT_GAME = 1;
 	private static final int DIALOG_LOAD_STATE = 2;
 	private static final int DIALOG_SAVE_STATE = 3;
+	private static final int DIALOG_UPGRADE = 4;
 
 	private static final int GAMEPAD_LEFT_RIGHT = (Emulator.GAMEPAD_LEFT | Emulator.GAMEPAD_RIGHT);
 	private static final int GAMEPAD_UP_DOWN = (Emulator.GAMEPAD_UP | Emulator.GAMEPAD_DOWN);
@@ -208,6 +209,8 @@ public class Agba extends Activity implements GameKeyListener,
 			return createLoadStateDialog();
 		case DIALOG_SAVE_STATE:
 			return createSaveStateDialog();
+		case DIALOG_UPGRADE:
+			return createPurchaseDialog();
 		}
 		return super.onCreateDialog(id);
 	}
@@ -304,7 +307,7 @@ public class Agba extends Activity implements GameKeyListener,
 			if (mIsPremium) {
 				showDialog(DIALOG_LOAD_STATE);
 			} else {
-				onUpgradeAppButtonClicked(null);
+				showDialog(DIALOG_UPGRADE);
 			}
 
 			return true;
@@ -518,6 +521,20 @@ public class Agba extends Activity implements GameKeyListener,
 			findViewById(viewIds[i]).setVisibility(
 					viewIds[i] == id ? View.VISIBLE : View.INVISIBLE);
 		}
+	}
+
+	private Dialog createPurchaseDialog() {
+		DialogInterface.OnClickListener l = new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				onUpgradeAppButtonClicked(null);
+			}
+		};
+
+		return new AlertDialog.Builder(this)
+				.setTitle(R.string.purchase_title)
+				.setMessage(R.string.purchase_message)
+				.setPositiveButton(R.string.ok_button, l)
+				.setOnCancelListener(this).create();
 	}
 
 	private Dialog createLoadStateDialog() {
